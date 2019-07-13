@@ -33,7 +33,7 @@ public class OutBy {
 	
 	@ManyToOne
 	@JoinColumn(name="BOWLDED_BY")
-	private Player bowledBy;
+	private Bowler bowledBy;
 	
 	@ManyToOne
 	@JoinColumn(name="CAUGHT_BY")
