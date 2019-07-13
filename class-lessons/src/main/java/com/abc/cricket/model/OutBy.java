@@ -44,8 +44,8 @@ public class OutBy {
 	private Player stumpedBy; 
 	
 	@ManyToOne
-	@JoinColumn(name="RUN_OUT_BY")
-	private Player runOutBy;
+	@JoinColumn(name="RUNOUT_BY")
+	private Player runoutBy;
 
 	@Column(name="LBW")
 	private boolean lbw;
