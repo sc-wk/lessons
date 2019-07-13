@@ -31,7 +31,7 @@ public class Bowler {
 	private Player player;
 	
 	@Column(name="OVERS")
-	private int overs;
+	private float overs;
 	
 	@Column(name="MAIDENS")
 	private int maidens;
