@@ -49,7 +49,7 @@ public class MatchInfoController {
 	public Match getMatch(@PathVariable long id) {
 		List<Match> matches = getMatches();
 		
-		if(matches!=null && matches.size() < id)
+		if(matches!=null && matches.size() <= id)
 			return null;
 		
 		Match m = matches.get((int)id);
