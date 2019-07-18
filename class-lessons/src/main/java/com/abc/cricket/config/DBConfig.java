@@ -73,12 +73,12 @@ public class DBConfig {
 	}
 
 	
-	@Bean("scorecard-emf")
+	@Bean
 	public EntityManagerFactory entityManagerFactory(@Qualifier("scorecard-rep_rdbms_emf.bean") LocalContainerEntityManagerFactoryBean entityMgrFactory) {
 		return entityMgrFactory.getObject();
 	}
 
-	@Bean("scorecard-jpa.txnMgr")
+	@Bean
 	public PlatformTransactionManager transactionManager(@Qualifier("scorecard-rep_rdbms_emf.bean") LocalContainerEntityManagerFactoryBean entityMgrFactoryBean) {
 		return new JpaTransactionManager(entityMgrFactoryBean.getObject());
 	}

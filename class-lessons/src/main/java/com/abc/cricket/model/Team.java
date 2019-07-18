@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.abc.cricket.ApplicationException;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -38,4 +40,12 @@ public class Team {
 	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
 	@JoinColumn(name="TEAM_ID")
 	private List<Player> players;
+	
+	
+	public Player getPlayer(int playerId) throws ApplicationException {
+		return getPlayers().stream()
+				.filter(p->p.getId()==playerId)
+				.findFirst()
+				.orElseThrow(()->new ApplicationException("Player with id: "+playerId+" not found in Team: "+this));
+	}
 }

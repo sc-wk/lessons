@@ -18,17 +18,17 @@ import lombok.ToString;
  *
  */
 @Entity
-@Table(name="ADDRESS")
+@Table(name="STADIUM")
 @Getter @Setter @ToString
-public class Address {
+public class Stadium {
 
 	@Id
-	@SequenceGenerator(name="SEQ_ADDR")
+	@SequenceGenerator(name="SEQ_STADIUM")
 	@Column(name="ID")
 	private int id;
 	
-	@Column(name="stadium")
-	private String stadium;
+	@Column(name="name")
+	private String name;
 	
 	@Column(name="city")
 	private String city;
