@@ -44,8 +44,8 @@
 		</encoder>
 	</appender>
 
-	<logger name="org.springframework" level="INFO" />
-	<logger name="com.abc" level="INFO" />
+	<logger name="org.springframework" level="ERROR" />
+	<logger name="com.abc" level="TRACE" />
 
 	<root level="INFO">
 		<appender-ref ref="FILE" />

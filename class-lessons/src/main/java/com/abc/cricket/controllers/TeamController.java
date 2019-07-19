@@ -5,6 +5,8 @@ package com.abc.cricket.controllers;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +31,8 @@ public class TeamController {
 	@Autowired
 	private TeamService service;
 	
+	private Logger logger = LoggerFactory.getLogger(getClass());
+	
 	@RequestMapping
 	public List<Team> getTeams() {
 		return service.findAll();
@@ -36,6 +40,7 @@ public class TeamController {
 	
 	@RequestMapping("/{id}")
 	public Team getTeam(@PathVariable int id) {
+		logger.trace("getTeam invoked with id: "+id);
 		return service.find(id);
 	}
 	
