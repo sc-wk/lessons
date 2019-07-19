@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+	<include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+	<property name="SC_LOG_FILE" value="/var/scorecard/cricket-app-${PID}"/>
+	
+	
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${SC_LOG_FILE}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- Daily Roll Over -->
+			<fileNamePattern>${SC_LOG_FILE}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<!-- Roll over when the file size reaches 20 MB -->
+			<maxFileSize>20MB</maxFileSize>
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date{"yyyy-MM-dd'T'HH:mm:ss,SSSXXX", UTC} %level [${PID}][%thread] %logger{10} [%file:%line] %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="ERR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${SC_LOG_FILE}.err.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<!-- Daily Roll Over -->
+			<fileNamePattern>${SC_LOG_FILE}-%d{yyyy-MM-dd}.%i.err.log</fileNamePattern>
+			<!-- Roll over when the file size reaches 20 MB -->
+			<maxFileSize>20MB</maxFileSize>
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%date{"yyyy-MM-dd'T'HH:mm:ss,SSSXXX", UTC} %level [${PID}][%thread] %logger{10} [%file:%line] %msg%n</pattern>
+		</encoder>
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+	        <level>ERROR</level>
+	    </filter>		
+	</appender>
+	
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date{"yyyy-MM-dd'T'HH:mm:ss,SSSXXX", UTC} %level [${PID}][%thread] %logger{10} [%file:%line] %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="org.springframework" level="INFO" />
+	<logger name="com.abc" level="INFO" />
+
+	<root level="INFO">
+		<appender-ref ref="FILE" />
+		<appender-ref ref="STDOUT" /> <!--  --> 
+	</root>
+	
+	<root level="ERROR">
+		<appender-ref ref="ERR_FILE" />
+		<appender-ref ref="STDOUT" />  <!-- --> 
+	</root>
+
+</configuration>
