@@ -81,6 +81,6 @@ public class Batsman {
 	}
 	
 	private void refreshStrikeRate() {
-		setStrikeRate(runs/bowlsFaced * 100);
+		setStrikeRate(bowlsFaced==0 ? 0 : runs/bowlsFaced * 100);
 	}
 }
