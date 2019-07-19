@@ -35,7 +35,7 @@ public class Match {
 	@GeneratedValue(generator="SEQ_MATCHES")
 	@SequenceGenerator(name="SEQ_MATCHES", initialValue=1, allocationSize=1)
 	@Column(name="ID")
-	private int id;
+	private Integer id;
 	
 	@Column(name="WHEN")
 	private Date when;

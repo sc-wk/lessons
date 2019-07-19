@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -33,12 +34,13 @@ import lombok.ToString;
 public class Bowler {
 
 	@Id
-	@SequenceGenerator(name="SEQ_BOWLER")
+	@GeneratedValue(generator="SEQ_BOWLER")
+	@SequenceGenerator(name="SEQ_BOWLER", initialValue=1, allocationSize=1)
 	@Column(name="ID")
-	private int id;
+	private Integer id;
 	
 	@Column(name="INNINGS_ID")
-	private int inningsId;
+	private Integer inningsId;
 	
 	@ManyToOne
 	@JoinColumn
@@ -116,6 +118,6 @@ public class Bowler {
 	}
 	
 	private void refreshEconomyRate() {
-		setEconomyRate(getRuns()/getOvers());
+		setEconomyRate(runs/overs);
 	}
 }

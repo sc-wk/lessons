@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -33,12 +34,13 @@ import lombok.ToString;
 public class Batsman {
 
 	@Id
-	@SequenceGenerator(name="SEQ_BATSMAN")
+	@GeneratedValue(generator="SEQ_BATSMAN")
+	@SequenceGenerator(name="SEQ_BATSMAN", initialValue=1, allocationSize=1)
 	@Column(name="ID")
-	private int id;
+	private Integer id;
 	
 	@Column(name="INNINGS_ID")
-	private int inningsId;
+	private Integer inningsId;
 	
 	@ManyToOne
 	@JoinColumn
@@ -79,6 +81,6 @@ public class Batsman {
 	}
 	
 	private void refreshStrikeRate() {
-		setStrikeRate(getRuns()/getBowlsFaced() * 100);
+		setStrikeRate(runs/bowlsFaced * 100);
 	}
 }

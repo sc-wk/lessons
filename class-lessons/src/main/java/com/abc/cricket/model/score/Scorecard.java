@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -31,12 +32,13 @@ import lombok.ToString;
 public class Scorecard {
 	
 	@Id
-	@SequenceGenerator(name="SEQ_SCORECARD")
+	@GeneratedValue(generator="SEQ_SCORECARD")
+	@SequenceGenerator(name="SEQ_SCORECARD", initialValue=1, allocationSize=1)
 	@Column(name="ID")
-	private int id;
+	private Integer id;
 
 	@Column(name="MATCH_ID")
-	private int matchId;
+	private Integer matchId;
 	
 	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true)
 	@JoinColumn

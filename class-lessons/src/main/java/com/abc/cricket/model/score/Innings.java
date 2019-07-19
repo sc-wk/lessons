@@ -11,6 +11,7 @@ import java.util.Optional;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -39,12 +40,13 @@ import lombok.ToString;
 public class Innings {
 
 	@Id
-	@SequenceGenerator(name="SEQ_INNINGS")
+	@GeneratedValue(generator="SEQ_INNINGS")
+	@SequenceGenerator(name="SEQ_INNINGS", initialValue=1, allocationSize=1)
 	@Column(name="ID")
-	private int id;
+	private Integer id;
 	
 	@Column(name="SCORECARD_ID")
-	private int scorecardId;
+	private Integer scorecardId;
 	
 	@ManyToOne
 	@JoinColumn(name="BATTING_TEAM_ID")

@@ -13,18 +13,26 @@ import com.abc.cricket.model.score.Innings;
 import com.abc.cricket.repo.BowledRecordRepo;
 import com.abc.cricket.repo.InningsRepo;
 
+import lombok.Getter;
+
 /**
  * @author Soham Chakravarti
  *
  */
 @Service
-public class InningsService {
+@Getter 
+public class InningsService extends AbstractService<Innings> {
 
 	@Autowired
 	private BowledRecordRepo brRepo;
 	
 	@Autowired
 	private InningsRepo repo;
+	
+	@Override
+	protected Class<Innings> getEntityClass() {
+		return Innings.class;
+	}
 	
 	/**
 	 * 1. Persist {@link BowledRecord} into database <br>

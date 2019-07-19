@@ -4,12 +4,13 @@
 package com.abc.cricket.model.view;
 
 import java.util.Date;
-import java.util.Optional;
 import java.util.function.Function;
 
+import javax.validation.constraints.NotNull;
+
 import com.abc.cricket.model.Match;
+import com.abc.cricket.model.Stadium;
 import com.abc.cricket.model.Team;
-import com.abc.cricket.service.ModelNotFoundException;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,27 +21,30 @@ import lombok.ToString;
  *
  */
 @Getter @Setter @ToString
-public class MatchCreateRequest {
+public class MatchCreateRequest extends AbstractViewModel {
 
-	private int stadiumId;
-	private int team1Id;
-	private int team2Id;
+	@NotNull
+	private Integer stadiumId;
+	
+	private Integer team1Id;
+	private Integer team2Id;
+	
+	@NotNull
 	private Date when;
 	
-	public Match convert(Function<Integer, Team> teamLookup) {
-		Team t1 = getTeam(teamLookup, team1Id);
-		Team t2 = getTeam(teamLookup, team2Id);
+	public Match convert(Function<Integer, Team> teamLookup, Function<Integer, Stadium> stadiumLookup) {
+		Team t1 = callback(teamLookup, team1Id);
+		Team t2 = callback(teamLookup, team2Id);
+		
+		Stadium s = callback(stadiumLookup, stadiumId);
 		
 		Match m = new Match();
+		m.setStadium(s);
 		m.setTeam1(t1);
 		m.setTeam2(t2);
 		m.setWhen(getWhen());
 		
 		return m;
 	}
-	
-	private Team getTeam(Function<Integer, Team> teamLookup, int id) {
-		return Optional.ofNullable(teamLookup.apply(id))
-				.orElseThrow(()->new ModelNotFoundException("Team not found for id: "+id));
-	}
+
 }

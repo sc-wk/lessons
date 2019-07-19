@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.abc.lessons.ClassLessonsApplication;
 import com.abc.lessons.L03.car.Car;
 import com.abc.lessons.L03.car.CarFactory;
 import com.abc.lessons.L03.car.CarFactoryFactory;
@@ -25,7 +26,7 @@ import com.abc.lessons.L03.car.gasoline.GasolineCarFactory;
  *
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes=ClassLessonsApplication.class)
 public class CarFactoryTest {
 
 	@Autowired

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.abc.lessons.ClassLessonsApplication;
 import com.abc.lessons.L02.cycle.Cycle;
 import com.abc.lessons.L02.cycle.CycleFactory;
 import com.abc.lessons.L02.cycle.types.Bicycle;
@@ -25,7 +26,7 @@ import com.abc.lessons.L02.cycle.types.Tricycle;
  *
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes=ClassLessonsApplication.class)
 public class CycleFactoryTest {
 
 	@Autowired

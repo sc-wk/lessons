@@ -25,12 +25,9 @@ public class Player {
 	
 	@Id
 	@GeneratedValue(generator="SEQ_PLAYER")
-	@SequenceGenerator(name="SEQ_PLAYER")
+	@SequenceGenerator(name="SEQ_PLAYER", initialValue=1, allocationSize=1)
 	@Column(name="ID")
-	private int id;
-	
-	@Column(name="TEAM_ID")
-	private int teamId;
+	private Integer id;
 	
 	@Column(name="FIRST_NM")
 	private String firstName;

@@ -16,6 +16,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * 
@@ -23,33 +24,18 @@ import org.springframework.transaction.PlatformTransactionManager;
  *
  */
 @Configuration
+@EnableTransactionManagement
 public class DBConfig {
 	
 	@Autowired
     private Environment env;
-	
-//	@Bean({"scorecard-datasource"})
-//	@Primary
-//	public DataSource dataSource() {
-//		BasicDataSource dataSource = new BasicDataSource();
-//		dataSource.setDriverClassName(env.getProperty("jdbc.driverClassName"));
-//		dataSource.setUrl(env.getProperty("jdbc.url"));
-//		dataSource.setUsername(env.getProperty("jdbc.username"));
-//		dataSource.setPassword(env.getProperty("jdbc.password"));
-//		
-//		dataSource.setDefaultTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-//		dataSource.setMaxTotal(env.getProperty("jdbc.con.maxTotal", Integer.class));
-//		dataSource.setTestOnBorrow(true);
-//		
-//		return dataSource;
-//	}
 	
 	@Bean({"scorecard-rep_rdbms_emf.bean"})
 	@Primary
 	public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(DataSource ds) {
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		
-		vendorAdapter.setDatabase(Database.ORACLE);
+		vendorAdapter.setDatabase(env.getProperty("hibernate.database", Database.class));
 		vendorAdapter.setGenerateDdl(env.getProperty("hibernate.generateDDL", Boolean.class, false));
 
 		LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();

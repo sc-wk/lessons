@@ -16,14 +16,15 @@ import com.abc.cricket.service.InningsService;
  * @author Soham Chakravarti
  *
  */
-@RestController("/innings")
+@RestController
+@RequestMapping("/innings")
 public class InningsController {
 
 	@Autowired
 	private InningsService service;
 	
 	@RequestMapping(value="/{id}/nextBowl", method=RequestMethod.PUT)
-	public void updateScore(@PathVariable int id, BowledRecord br) {
+	public void nextBowl(@PathVariable int id, BowledRecord br) {
 		service.updateScore(br);
 	}
 }

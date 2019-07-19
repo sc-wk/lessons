@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.abc.cricket.model.Player;
 import com.abc.cricket.model.Team;
+import com.abc.cricket.model.view.PlayerCreateRequest;
+import com.abc.cricket.model.view.TeamCreateRequest;
 import com.abc.cricket.service.TeamService;
 
 /**
@@ -20,24 +23,39 @@ import com.abc.cricket.service.TeamService;
  *
  */
 @RestController
+@RequestMapping("/teams")
 public class TeamController {
 
 	@Autowired
 	private TeamService service;
 	
-	@RequestMapping("/teams")
+	@RequestMapping
 	public List<Team> getTeams() {
-		return service.getTeams();
+		return service.findAll();
 	}
 	
-	@RequestMapping("/teams/{id}")
+	@RequestMapping("/{id}")
 	public Team getTeam(@PathVariable int id) {
-		return service.getTeam(id);
+		return service.find(id);
 	}
 	
-	@RequestMapping(value="/teams", method=RequestMethod.POST)
-	public int createTeam(@RequestBody Team t) {
-		return service.createTeam(t);
+	@RequestMapping(method=RequestMethod.POST)
+	public int createTeam(@RequestBody TeamCreateRequest req) {
+		Team t = req.convert();
+		
+		Team tCreated = service.create(t);
+		return tCreated.getId();
 	}
 	
+	@RequestMapping(value="/{id}/players", method=RequestMethod.PUT)
+	public void addPlayer(@PathVariable int id, @RequestBody PlayerCreateRequest req) {
+		Player p = req.convert();
+		
+		service.addPlayers(id, p);
+	}
+	
+	@RequestMapping(value="/{id}/players/{playerId}", method=RequestMethod.DELETE)
+	public Player removePlayer(@PathVariable int id, @PathVariable int playerId) {
+		return service.removePlayer(id, playerId);
+	}
 }

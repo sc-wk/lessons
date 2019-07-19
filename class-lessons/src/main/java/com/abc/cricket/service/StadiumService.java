@@ -6,8 +6,8 @@ package com.abc.cricket.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.abc.cricket.model.Match;
-import com.abc.cricket.repo.MatchRepo;
+import com.abc.cricket.model.Stadium;
+import com.abc.cricket.repo.StadiumRepo;
 
 import lombok.Getter;
 
@@ -17,13 +17,14 @@ import lombok.Getter;
  */
 @Service
 @Getter
-public class MatchService extends AbstractService<Match> {
+public class StadiumService extends AbstractService<Stadium> {
 
 	@Autowired
-	private MatchRepo repo;
-
+	private StadiumRepo repo;
+	
 	@Override
-	protected Class<Match> getEntityClass() {
-		return Match.class;
+	public Class<Stadium> getEntityClass() {
+		return Stadium.class;
 	}
+
 }
