@@ -41,10 +41,10 @@ public class InningsService extends AbstractService<Innings> {
 	 * @param nextBowl
 	 */
 	@Transactional
-	public void updateScore(BowledRecord nextBowl) {
+	public int updateScore(BowledRecord nextBowl) {
 	
 		// 1. persist next bowl info in database
-		brRepo.save(nextBowl);
+		BowledRecord nextBowlCreated = brRepo.save(nextBowl);
 		
 		// 2. retrieve Innings
 		Innings inn = repo.findById(nextBowl.getInningsId())
@@ -56,5 +56,7 @@ public class InningsService extends AbstractService<Innings> {
 		
 		// 3. persist Innings info in database
 		repo.save(inn);
+		
+		return nextBowlCreated.getId();
 	}
 }

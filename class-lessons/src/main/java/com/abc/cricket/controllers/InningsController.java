@@ -24,7 +24,7 @@ public class InningsController {
 	private InningsService service;
 	
 	@RequestMapping(value="/{id}/nextBowl", method=RequestMethod.PUT)
-	public void nextBowl(@PathVariable int id, BowledRecord br) {
-		service.updateScore(br);
+	public int nextBowl(@PathVariable int id, BowledRecord br) {
+		return service.updateScore(br);
 	}
 }

@@ -118,6 +118,6 @@ public class Bowler {
 	}
 	
 	private void refreshEconomyRate() {
-		setEconomyRate(runs/overs);
+		setEconomyRate(overs==0 ? 0 : runs/overs);
 	}
 }

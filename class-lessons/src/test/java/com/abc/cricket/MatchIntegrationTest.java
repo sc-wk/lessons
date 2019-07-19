@@ -35,7 +35,7 @@ import com.abc.cricket.repo.TeamRepo;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes=ScorecardApplication.class)
 @ActiveProfiles("test")
-public class CreateMatchScenarioIntegrationTest {
+public class MatchIntegrationTest {
 
 	@Autowired
 	MatchController matchController;

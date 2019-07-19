@@ -11,6 +11,7 @@ import java.util.Optional;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -48,11 +49,11 @@ public class Innings {
 	@Column(name="SCORECARD_ID")
 	private Integer scorecardId;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="BATTING_TEAM_ID")
 	private Team battingTeam;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="BOWLING_TEAM_ID")
 	private Team bowlingTeam;
 	

@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -40,11 +41,11 @@ public class Scorecard {
 	@Column(name="MATCH_ID")
 	private Integer matchId;
 	
-	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true)
+	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.EAGER)
 	@JoinColumn
 	private Innings firstInnings;
 	
-	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true)
+	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true, fetch=FetchType.EAGER)
 	@JoinColumn
 	private Innings secondInnings;
 	
